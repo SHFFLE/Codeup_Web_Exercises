@@ -1,0 +1,118 @@
+body {
+    margin: 0 20px;
+    background-color: aqua;
+}
+#nav li{
+    display:inline;
+    margin-right: 15px;
+}
+.input {
+    height: 30px;
+    font-size: 20px;
+    margin-left: 15px;
+}
+#signup {
+    height: 235px;
+    border: 1px solid black;
+    background-repeat: no-repeat;
+    background-image: url("../img/sami.jpg");
+    background-color: darkblue;
+    background-position: center;
+    margin:auto;
+    text-align: center;
+    color: white;
+}
+#container {
+    margin:auto;
+}
+#p1{
+    width: 75%;
+    float:left;
+}
+#p2 {
+    width: 25%;
+    float:right;
+}
+#footer {
+    clear: both;
+    margin:auto;
+    margin-bottom: 20px;
+    text-align: center;
+    border: 2px solid purple
+}
+@media (max-width: 890px) {
+    #nav li{
+        display: list-item;
+        margin-right: 0;
+        list-style: none;
+    }
+    .input {
+        height:20px;
+        font-size:12px;
+        width: 75%;
+        margin: 15px 0;
+    }
+    #submit {
+        display: block;
+        margin: auto;
+        width: 25%;
+    }
+    #signup {
+        height: 300px;
+    }
+    #p1 {
+        width:95%;
+    }
+    #p2 {
+        width:95%;
+        float:left;
+    }
+    body {
+        font-size: small;
+    }
+}
+@media (max-width: 700px){
+    .input {
+        width: 85%;
+    }
+    #submit {
+        display: block;
+        margin: auto;
+        width: 25%;
+    }
+    body {
+        font-size: 2vw;
+    }
+}
+@media (max-width: 480px){
+    #nav li {
+        width: 200px;
+    }
+    .input {
+        width: 420px;
+    }
+    #container {
+        width: 440px;
+        margin: auto;
+    }
+    #submit {
+        width: 120px;
+    }
+    #signup {
+        width: 440px;
+    }
+    #p1 {
+        width: 440px;
+    }
+    #p2 {
+        width: 440px;
+    }
+    #footer {
+        width: 440px;
+    }
+    body {
+        text-wrap: normal;
+        font-size: 9px;
+        margin: auto;
+    }
+}

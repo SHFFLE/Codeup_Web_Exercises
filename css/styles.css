@@ -1,0 +1,31 @@
+h1 {
+    color: rebeccapurple;
+    text-decoration: underline;
+}
+body {
+    background-color: aliceblue;
+    background-image: url(../img/twintania.jpg);
+    background-repeat: repeat-y;
+    background-position: 175%;
+    font-family: monospace,  "Times New Roman", Serif)
+}
+ul {
+    list-style: hiragana;
+}
+tr {
+    font-size: 2em;
+    text-align: center;
+}
+td {
+    font-size: 1.5em;
+    text-align: center;
+}
+a:link {
+    color: orange;
+}
+a:visited {
+    color:darkred;
+}
+a:hover {
+    color:blueviolet
+}

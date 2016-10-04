@@ -1,0 +1,101 @@
+body {
+    margin: 0 20px;
+    background-color: aquamarine; /* different colors are probably a must */
+}
+/* nav list is going to always be the same, so being lazy and using id here is fine */
+#nav ul {
+    list-style: none;
+    width: 90px;
+    margin-left: 0px;
+    padding-left: 10px
+    margin-right: 5vw;
+    float: left;
+    border-right: 1px solid rebeccapurple;
+}
+/* Container itself should be constant but I need to id individual containers, mostly for text-align type reasons */
+.container {
+    width: 80vw;
+    margin: auto;
+    float: left;
+}
+/* I only want the mainpage's container to adhere to this */
+#container img {
+    float:right;
+    height: 150px;
+    width: 150px;
+}
+/* I want all the headers, unless there's an exception, to adhere to this */
+.container h1 {
+    text-align: center;
+}
+/* Same here, though there's only 1 h2 anywhere */
+.container h2 {
+    text-align: center;
+}
+/* I want biocontainer to be entirely centered */
+#biocontainer {
+    text-align: center
+}
+/* Actually don't have a footer rn, but whatever */
+#footer {
+    clear: both;
+    margin:auto;
+    margin-bottom: 20px;
+    text-align: center;
+    border: 2px solid purple
+}
+/* Just want my leftdiv on resume to adhere to this */
+#leftdiv {
+    margin-left: 10px;
+    float:left;
+    width: 20%;
+    border-right: 1px solid rebeccapurple;
+}
+/* Same for rightdiv */
+#rightdiv {
+    float:right;
+    width: 75%;
+}
+/* Because there will theoretically be multiple of these at all times, I just made it a class, put in placeholders, whatevs */
+.portbox {
+    float:left;
+    margin: 15px;
+}
+/* Makes the nav bar take up the full screen width at a certain point */
+@media (max-width: 945px) {
+    .container {
+        float: none;
+    }
+    #nav ul {
+        border-right: 0px;
+        border-bottom: 1px solid rebeccapurple;
+        font-size: 25px;
+        margin-bottom 5px;
+        width: 100%;
+    }
+    .container p, .container div {
+        font-size: 20px;
+    }
+    .container h1, .container h2 {
+        font-size: 36px;
+    }
+    .portbox {
+        float:none;
+        margin: auto;
+        text-align: center;
+    }
+}
+@media (max-width: 480px) {
+    #nav ul {
+        width: 100%;
+    }
+
+    .container {
+        width: 440px;
+        margin: auto;
+    }
+
+    #footer {
+        width: 440px;
+    }
+}

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Form</title>
+</head>
+<body>
+    <h1>User Login</h1>
+    <form method="POST" action="http://requestb.in/pgq9fvpg">
+        <p>
+            <label for="username">Username</label>
+            <input id="username" name="username" type="text" required autofocus placeholder="Username">
+        </p>
+        <p>
+            <label for="password">Password</label>
+            <input id="password" name="password" type="password" required placeholder="Password">
+        </p>
+        <p>
+            <input type="submit">
+        </p>
+    </form>
+    <h2>Compose an Email</h2>
+    <form method="POST" action="http://requestb.in/pgq9fvpg">
+        <p>
+            <label for="to">To: </label>
+            <input id="to" name="to" type="text" required autofocus placeholder="Recipient">
+            <label for="from">From: </label>
+            <input id="from" name="from" type="text" required placeholder="Sender">
+        </p>
+        <p>
+            <input id="subject" name="subject" type="text" required placeholder="Subject">
+        </p>
+        <p>
+            <textarea name="body" id="body" cols="30" rows="10" required placeholder="Email body"></textarea>
+        </p>
+        <p>
+            <input type="submit">
+        </p>
+    </form>
+    <form method="POST" action="http://requestb.in/pgq9fvpg">
+        <h2>Multiple Choice Test</h2>
+        <h4>What stat is best for MCH?</h4>
+        <label><input type="radio" name="q1" value="Crit">Crit</label>
+        <label><input type="radio" name="q1" value="Det">Det</label>
+        <label><input type="radio" name="q1" value="SkS">SkS</label>
+        <h4>What jobs benefit from Pie?</h4>
+        <label><input type="checkbox" id="job1" name="job[]" value="DRK">DRK</label>
+        <label><input type="checkbox" id="job2" name="job[]" value="BLM">BLM</label>
+        <label><input type="checkbox" id="job3" name="job[]" value="SMN">SMN</label>
+        <label><input type="checkbox" id="job4" name="job[]" value="WHM">WHM</label>
+        <label><input type="checkbox" id="job5" name="job[]" value="SCH">SCH</label>
+        <label><input type="checkbox" id="job6" name="job[]" value="AST">AST</label>
+        <label><input type="checkbox" id="job7" name="job[]" value="PLD">PLD</label>
+        <p><input type="submit"></p>
+    </form>
+    <form method="POST" action="http://requestb.in/pgq9fvpg">
+        <h4>Is Alexander The Creator the coolest HW raid tier?</h4>
+        <select id="alex" name="alex">
+            <option selected>Yes</option>
+            <option>No</option>
+        </select>
+        <h4>What jobs don't yet exist in FFXIV?</h4>
+        <p>
+            <select id="jobs" name="jobs[]" multiple>
+                <option>WHM</option>
+                <option>BLM</option>
+                <option>RDM</option>
+                <option>GEO</option>
+                <option>MNK</option>
+                <option>PPT</option>
+                <option>SAM</option>
+                <option>DNC</option>
+                <option>DRK</option>
+                <option>MCH</option>
+                <option>AST</option>
+                <option>PLD</option>
+            </select>
+        </p>
+        <p><button>Submit</button></p>
+    </form>
+</body>
+</html>
