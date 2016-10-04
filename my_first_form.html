@@ -3,65 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <title>Form</title>
+    <link rel="stylesheet" href="css/metroishbootstrap.css">
 </head>
 <body>
     <h1>User Login</h1>
     <form method="POST" action="http://requestb.in/pgq9fvpg">
-        <p>
+        <div class="form-group">
             <label for="username">Username</label>
-            <input id="username" name="username" type="text" required autofocus placeholder="Username">
-        </p>
-        <p>
+            <input id="username" name="username" class="form-control" type="text" required autofocus placeholder="Username">
+        </div>
+        <div class="form-group">
             <label for="password">Password</label>
-            <input id="password" name="password" type="password" required placeholder="Password">
-        </p>
-        <p>
-            <input type="submit">
-        </p>
+            <input id="password" name="password" class="form-control" type="password" required placeholder="Password">
+        </div>
+        <div class="form-group">
+            <button class="btn btn-default">Submit</button>
+        </div>
     </form>
     <h2>Compose an Email</h2>
     <form method="POST" action="http://requestb.in/pgq9fvpg">
-        <p>
+        <div class="form-group">
             <label for="to">To: </label>
-            <input id="to" name="to" type="text" required autofocus placeholder="Recipient">
+            <input id="to" name="to" class="form-control form-inline" type="text" required autofocus placeholder="Recipient">
             <label for="from">From: </label>
-            <input id="from" name="from" type="text" required placeholder="Sender">
-        </p>
-        <p>
-            <input id="subject" name="subject" type="text" required placeholder="Subject">
-        </p>
-        <p>
-            <textarea name="body" id="body" cols="30" rows="10" required placeholder="Email body"></textarea>
-        </p>
-        <p>
-            <input type="submit">
-        </p>
+            <input id="from" name="from" class="form-control form-inline" type="text" required placeholder="Sender">
+        </div>
+        <div class="form-group">
+            <input id="subject" name="subject" class="form-control" type="text" required placeholder="Subject">
+        </div>
+        <div class="form-group">
+            <textarea name="body" id="body" cols="30" rows="10" class="form-control" required placeholder="Email body"></textarea>
+        </div>
+        <div>
+            <button type="submit" class="btn btn-default">Submit</button>
+        </div>
     </form>
     <form method="POST" action="http://requestb.in/pgq9fvpg">
         <h2>Multiple Choice Test</h2>
         <h4>What stat is best for MCH?</h4>
-        <label><input type="radio" name="q1" value="Crit">Crit</label>
-        <label><input type="radio" name="q1" value="Det">Det</label>
-        <label><input type="radio" name="q1" value="SkS">SkS</label>
+        <div>
+            <label class="radio-inline"><input type="radio" name="q1" value="Crit">Crit</label>
+            <label class="radio-inline"><input type="radio" name="q1" value="Det">Det</label>
+            <label class="radio-inline"><input type="radio" name="q1" value="SkS">SkS</label>
+        </div>
         <h4>What jobs benefit from Pie?</h4>
-        <label><input type="checkbox" id="job1" name="job[]" value="DRK">DRK</label>
-        <label><input type="checkbox" id="job2" name="job[]" value="BLM">BLM</label>
-        <label><input type="checkbox" id="job3" name="job[]" value="SMN">SMN</label>
-        <label><input type="checkbox" id="job4" name="job[]" value="WHM">WHM</label>
-        <label><input type="checkbox" id="job5" name="job[]" value="SCH">SCH</label>
-        <label><input type="checkbox" id="job6" name="job[]" value="AST">AST</label>
-        <label><input type="checkbox" id="job7" name="job[]" value="PLD">PLD</label>
-        <p><input type="submit"></p>
+        <div>
+            <label class="checkbox-inline"><input type="checkbox" id="job1" name="job[]" value="DRK">DRK</label>
+            <label class="checkbox-inline"><input type="checkbox" id="job2" name="job[]" value="BLM">BLM</label>
+            <label class="checkbox-inline"><input type="checkbox" id="job3" name="job[]" value="SMN">SMN</label>
+            <label class="checkbox-inline"><input type="checkbox" id="job4" name="job[]" value="WHM">WHM</label>
+            <label class="checkbox-inline"><input type="checkbox" id="job5" name="job[]" value="SCH">SCH</label>
+            <label class="checkbox-inline"><input type="checkbox" id="job6" name="job[]" value="AST">AST</label>
+            <label class="checkbox-inline"><input type="checkbox" id="job7" name="job[]" value="PLD">PLD</label>
+        </div>
+        <button class="btn btn-default">Submit</button>
     </form>
-    <form method="POST" action="http://requestb.in/pgq9fvpg">
+    <form method="POST" action="http://requestb.in/pgq9fvpg" class="form-group">
         <h4>Is Alexander The Creator the coolest HW raid tier?</h4>
-        <select id="alex" name="alex">
+        <select id="alex" name="alex" class="form-control">
             <option selected>Yes</option>
             <option>No</option>
         </select>
         <h4>What jobs don't yet exist in FFXIV?</h4>
         <p>
-            <select id="jobs" name="jobs[]" multiple>
+            <select id="jobs" name="jobs[]" multiple class="form-control">
                 <option>WHM</option>
                 <option>BLM</option>
                 <option>RDM</option>
@@ -76,7 +81,9 @@
                 <option>PLD</option>
             </select>
         </p>
-        <p><button>Submit</button></p>
+        <p><button class="btn btn-default">Submit</button></p>
     </form>
+    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 </body>
 </html>
