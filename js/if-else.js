@@ -34,9 +34,9 @@ if (george > 200) {
 
 var flipACoin = Math.floor(Math.random()*2);
 
-if (flipACoin = 1){
+if (flipACoin == 1){
     console.log("Buy a house");
-} else if (flipACoin = 0){
+} else if (flipACoin == 0){
     console.log("Buy a car");
 } else {
     console.log("How the hell did you manage this?");
