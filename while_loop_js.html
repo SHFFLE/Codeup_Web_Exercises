@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+    var conesToSell = Math.floor(Math.random()*50)+50;
+    var iterations = 0;
+    do {
+        console.log("I have " + conesToSell + " cones to sell.");
+        var conesBought = Math.floor(Math.random() * 5) + 1;
+        if (conesBought > conesToSell) {
+            console.log("Sorry, I can't sell you " + conesBought + " I only have " + conesToSell + ".");
+            break;
+        } else if (conesBought == 1) {
+            console.log("Here is 1 cone for you.");
+            conesToSell -= conesBought;
+            iterations++;
+        }else{
+            console.log("Here are " + conesBought + " cones for you.");
+            conesToSell -= conesBought;
+            iterations++;
+        }
+
+    } while (conesToSell > 0);
+
+    console.log("Time to close up shop. I made " + iterations +" sales today and have " + conesToSell + " left.");
+    if (conesToSell == 0) {
+        console.log("I sold all my stock! :D");
+    }
+
+    var i = 0;
+    var maths = 1;
+    while (i < 16) {
+        maths = maths * 2;
+        i++;
+        console.log(maths);
+    }
+</script>
+</body>
+</html>
