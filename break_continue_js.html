@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var randomNum = Math.floor(Math.random()*50)+1;
+    while (randomNum % 2 == 0) {
+        randomNum = Math.floor(Math.random()*50)+1;
+    }
+    for (var i = 0; i <= 50; i++) {
+        if ((i == randomNum) && (i % 2 != 0)) {
+            console.log("Skipping");
+        } else if (i % 2 !== 0){
+            console.log("Your number is " + i);
+        }
+    }
+</script>
+</body>
+</html>
