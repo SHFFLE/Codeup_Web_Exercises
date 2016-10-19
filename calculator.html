@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/calculator.css">
+</head>
+<body>
+    <label for="leftOp"><input id="leftOp" type="text" maxlength="10" readonly></label>
+    <label for="Op"><input id="Op" type="text" maxlength="2" readonly></label>
+    <label for="rightOp"><input id="rightOp" type="text" readonly></label>
+
+    <div class="addtl" id="cancel"><a>C</a></div>
+    <div class="addtl" id="negative"><a>(-)</a></div>
+    <div class="addtl" id="percent"><a>%</a></div>
+    <div class="operator" id="plus"><a>+</a></div>
+
+    <div class="number" id="seven"><a>7</a></div>
+    <div class="number" id="eight"><a>8</a></div>
+    <div class="number" id="nine"><a>9</a></div>
+    <div class="operator" id="minus"><a>-</a></div>
+
+    <div class="number" id="four"><a>4</a></div>
+    <div class="number" id="five"><a>5</a></div>
+    <div class="number" id="six"><a>6</a></div>
+    <div class="operator" id="mul"><a>*</a></div>
+
+    <div class="number" id="one"><a>1</a></div>
+    <div class="number" id="two"><a>2</a></div>
+    <div class="number" id="three"><a>3</a></div>
+    <div class="operator" id="div"><a>/</a></div>
+
+    <div class="number" id="zero"><a>0</a></div>
+    <div class="operator" id="decimal"><a>.</a></div>
+    <div class="operator" id="equal"><a>=</a></div>
+
+    <div class="converter" id="hex"><a>Hex</a></div>
+    <div class="converter" id="binary"><a>Binary</a></div>
+
+    <h3>List of shortcuts:</h3>
+    <ul>
+        <li>Standard number keys 1-0</li>
+        <li>Numpad keys (should) also work</li>
+        <li>C or Delete for cancel</li>
+        <li>-/_ for subtraction operator</li>
+        <li>+/= for addition operator if no operator already specified</li>
+        <li>+/= will give result if operator is already specified</li>
+        <li>Enter and (theoretically) numpad enter will also give result</li>
+        <li>x for multiplication</li>
+        <li>/ for division (will also open Find in Firefox, unsure about other browsers - click back on page after hitting?)</li>
+    </ul>
+
+<script>
+    var leftOp = document.getElementById("leftOp");
+    var leftOpValue = '';
+    var rightOp = document.getElementById("rightOp");
+    var rightOpValue = '';
+    var Op = document.getElementById("Op");
+    var Operator = '';
+    var numbers = document.getElementsByClassName("number");
+    var operators = document.getElementsByClassName("operator");
+    var addtl = document.getElementsByClassName('addtl');
+    var converter = document.getElementsByClassName('converter');
+    var activeBox = 'left';
+    var c = 0;
+    var fresh = 'false';
+    var result;
+
+    //digits
+    numbers[0].addEventListener('click', function (){numberAdder(this.innerText)});
+    numbers[1].addEventListener('click', function (){numberAdder(this.innerText)});
+    numbers[2].addEventListener('click', function (){numberAdder(this.innerText)});
+    numbers[3].addEventListener('click', function (){numberAdder(this.innerText)});
+    numbers[4].addEventListener('click', function (){numberAdder(this.innerText)});
+    numbers[5].addEventListener('click', function (){numberAdder(this.innerText)});
+    numbers[6].addEventListener('click', function (){numberAdder(this.innerText)});
+    numbers[7].addEventListener('click', function (){numberAdder(this.innerText)});
+    numbers[8].addEventListener('click', function (){numberAdder(this.innerText)});
+    numbers[9].addEventListener('click', function (){numberAdder(this.innerText)});
+    operators[4].addEventListener('click', function (){numberAdder(this.innerText)});
+    window.addEventListener('keydown', checkkey);
+
+    //cancel
+    addtl[0].addEventListener('click', function (){cancel()});
+
+
+    //negative
+    addtl[1].addEventListener('click', function (){
+        if (activeBox == 'left')
+            if (leftOpValue.indexOf('-') > -1){
+                leftOpValue = (leftOpValue.substring(1, leftOpValue.length));
+                leftOp.setAttribute('value', leftOpValue);
+            } else if (leftOpValue.indexOf('-') < 0) {
+                leftOpValue = '-' + leftOpValue;
+                leftOp.setAttribute('value', leftOpValue);
+            }
+        if (activeBox == 'right')
+            if (rightOpValue.indexOf('-') > -1){
+                rightOpValue = (rightOpValue.substring(1, rightOpValue.length));
+                rightOp.setAttribute('value', rightOpValue);
+            } else if (rightOpValue.indexOf('-') < 0) {
+                rightOpValue = '-' + rightOpValue;
+                rightOp.setAttribute('value', rightOpValue);
+            }
+    });
+
+    //percent
+    addtl[2].addEventListener('click', function (){
+        if (activeBox == 'left') {
+            leftOpValue = (parseFloat(leftOpValue) * 0.01);
+            leftOpValue = (leftOpValue.toString());
+            leftOp.setAttribute('value', leftOpValue);
+        }
+        if (activeBox == 'right') {
+            rightOpValue = (parseFloat(rightOpValue) * 0.01);
+            rightOpValue = (rightOpValue.toString());
+            rightOp.setAttribute('value', rightOpValue);
+        }
+    });
+
+    //operators
+    operators[0].addEventListener('click', function (){addition()});
+    operators[1].addEventListener('click', function(){subtraction()});
+    operators[2].addEventListener('click', function(){multiplication()});
+    operators[3].addEventListener('click', function(){division()});
+
+    converter[0].addEventListener('click', function(){
+        if (leftOpValue != ''){
+            Operator = '16';
+            Op.setAttribute('value', Operator);
+            var Hex = parseFloat(leftOpValue).toString(16).toUpperCase();
+            rightOp.setAttribute('value', Hex);
+            c = 1;
+            fresh = 'true';
+        }
+    });
+    converter[1].addEventListener('click', function(){
+        if(leftOpValue != ''){
+            Operator = '2';
+            Op.setAttribute('value', Operator);
+            var Bi = parseFloat(leftOpValue).toString(2);
+            rightOp.setAttribute('value', Bi);
+            c = 1;
+            fresh = 'true';
+        }
+    });
+
+    //The actual math
+    operators[5].addEventListener('click', function(){equals()});
+
+
+    function numberAdder(num) {
+        if (activeBox == 'left') {
+            if ((num == '0') && (leftOpValue == '0')){
+            } else if ((num == '.') && (leftOpValue.indexOf('.') >= 0)) {
+            } else {
+                if (fresh == 'true') {
+                    leftOpValue = '';
+                    leftOpValue += num;
+                    leftOp.setAttribute('value', leftOpValue);
+                    rightOpValue = '';
+                    rightOp.setAttribute('value', rightOpValue);
+                    Operator = '';
+                    Op.setAttribute('value', Operator);
+                    fresh = 'false';
+                } else {
+                leftOpValue += num;
+                leftOp.setAttribute('value', leftOpValue);
+                }
+            }
+        } else if (activeBox == 'right') {
+            if ((num == '0') && (rightOpValue == '0')){
+            } else if ((num == '.') && (rightOpValue.indexOf(".") > -1)) {
+            } else {
+                if (fresh == 'true') {
+                    rightOpValue = '';
+                    rightOp.setAttribute('value', rightOpValue);
+                    fresh = 'false';
+                }
+                rightOpValue += num;
+                rightOp.setAttribute('value', rightOpValue);
+                }
+            }
+        }
+        function checkkey(e) {
+            var key = '';
+            if (e.keyCode == ('48' || '96')){
+                key = '0';
+                numberAdder(key);
+            } else if (e.keyCode == ('49' || '97')){
+                key = '1';
+                numberAdder(key);
+            } else if (e.keyCode == ('50' || '98')){
+                key = '2';
+                numberAdder(key);
+            } else if (e.keyCode == ('51' || '99')){
+                key = '3';
+                numberAdder(key);
+            } else if (e.keyCode == ('52' || '100')){
+                key = '4';
+                numberAdder(key);
+            } else if (e.keyCode == ('53' || '101')){
+                key = '5';
+                numberAdder(key);
+            } else if (e.keyCode == ('54' || '102')){
+                key = '6';
+                numberAdder(key);
+            } else if (e.keyCode == ('55' || '103')){
+                key = '7';
+                numberAdder(key);
+            } else if (e.keyCode == ('56' || '104')){
+                key = '8';
+                numberAdder(key);
+            } else if (e.keyCode == ('57' || '105')){
+                key = '9';
+                numberAdder(key);
+            } else if (e.keyCode == ('190' || '110')){
+                key = '.';
+                numberAdder(key);
+            } else if (e.keyCode == '67' || e.keyCode == '8'){
+                cancel();
+            } else if ((e.keyCode == ('61')) && (Operator == '')) {
+                addition();
+            } else if (e.keyCode == '173') {
+                subtraction();
+            } else if (e.keyCode == '88') {
+                multiplication();
+            } else if (e.keyCode == '191') {
+                division();
+            } else if (e.keyCode == '61' || '13') {
+                equals();
+            }
+        }
+
+        function cancel(){
+            if ((activeBox == 'left') && c == 0) {
+                leftOpValue = '';
+                leftOp.setAttribute('value', leftOpValue);
+            } else if (activeBox == 'right' && c == 0) {
+                rightOpValue = '';
+                rightOp.setAttribute('value', rightOpValue);
+                c++;
+            } else if (c == 1) {
+                rightOpValue = '';
+                rightOp.setAttribute('value', rightOpValue);
+                Operator = '';
+                Op.setAttribute('value', Operator);
+                c ++;
+            } else if (c == 2){
+                leftOpValue = '';
+                leftOp.setAttribute('value', leftOpValue);
+                rightOpValue = '';
+                rightOp.setAttribute('value', rightOpValue);
+                Operator = '';
+                Op.setAttribute('value', Operator);
+                c = 0;
+                activeBox = 'left';
+            }
+        }
+
+        function addition(){
+            if (leftOpValue != ''){
+                Operator = '+';
+                Op.setAttribute('value', Operator);
+                if (fresh = true) {
+                    rightOpValue = '';
+                    rightOp.setAttribute('value', rightOpValue);
+                }
+                activeBox = 'right';
+            }
+        }
+
+        function subtraction(){
+            if (leftOpValue != ''){
+                Operator = '-';
+                Op.setAttribute('value', Operator);
+                if (fresh = true) {
+                    rightOpValue = '';
+                    rightOp.setAttribute('value', rightOpValue);
+                }
+                activeBox = 'right';
+            }
+        }
+
+        function multiplication(){
+            if (leftOpValue != ''){
+                Operator = '*';
+                Op.setAttribute('value', Operator);
+                if (fresh = true) {
+                    rightOpValue = '';
+                    rightOp.setAttribute('value', rightOpValue);
+                }
+                activeBox = 'right';
+            }
+        }
+
+        function division(){
+            if (leftOpValue != ''){
+                Operator = '/';
+                Op.setAttribute('value', Operator);
+                if (fresh = true) {
+                    rightOpValue = '';
+                    rightOp.setAttribute('value', rightOpValue);
+                }
+                activeBox = 'right';
+            }
+        }
+
+        function equals(){
+            if (rightOpValue != '' && (Operator != ('16' || '2'))){
+                c = 0;
+                if (Operator == '/') {
+                    result = parseFloat(leftOpValue) / parseFloat(rightOpValue);
+                } else if (Operator == '+'){
+                    result = parseFloat(leftOpValue) + parseFloat(rightOpValue);
+                } else if (Operator == '-'){
+                    result = parseFloat(leftOpValue) - parseFloat(rightOpValue);
+                } else if (Operator == '*'){
+                    result = parseFloat(leftOpValue) * parseFloat(rightOpValue);
+                }
+                if ((Math.abs(result) == Infinity) || (result.toString() == 'NaN')) {
+                    alert("Please don't try to divide by zero... Resetting calculator.");
+                    leftOpValue = '';
+                    leftOp.setAttribute('value', leftOpValue);
+                    rightOpValue = '';
+                    rightOp.setAttribute('value', rightOpValue);
+                    Operator = '';
+                    activeBox = 'left';
+                    Op.setAttribute('value', Operator);
+                } else {
+                    alert("Result = " + result);
+                    leftOpValue = result;
+                    leftOp.setAttribute('value', leftOpValue);
+                    fresh = "true";
+                }
+            }
+        }
+</script>
+</body>
+</html>

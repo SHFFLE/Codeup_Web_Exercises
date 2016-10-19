@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/cards.css">
+</head>
+<body>
+    <div id="one"><p></p></div>
+    <div id="two"><p></p></div>
+    <div id="three"><p></p></div>
+    <div id="four"><p></p></div>
+    <div id="five"><p></p></div>
+    <div id="six"><p></p></div>
+    <div id="seven"><p></p></div>
+    <div id="eight"><p></p></div>
+    <div id="nine"><p></p></div>
+    <div id="ten"><p></p></div>
+
+    <button>Reset</button>
+<script>
+
+    var clicknum = 0;
+    var cardstyle = document.getElementsByTagName('div');
+    var cards = document.getElementsByTagName('p');
+    var button = document.getElementsByTagName('button');
+    var activeCardOne;
+    var activeCardTwo;
+    var card1;
+    var card2;
+    var inner = ['Ace', '2', '3', '4', '5'];
+    var used = [];
+    var solved = 0;
+    var i = 0;
+
+    while (i < cards.length) {
+        var random = Math.floor(Math.random() * 5);
+        console.log(random);
+        var toput = inner[random];
+        console.log(toput);
+        if (used.indexOf(toput) != used.lastIndexOf(toput)) {
+            console.log('shouldskip');
+        } else {
+            cards[i].innerHTML = toput.toString();
+            used += toput;
+            console.log(cards[i].innerHTML);
+            i++;
+        }
+    }
+
+    cardstyle[0].addEventListener('click', function(){onClick(0)});
+    cardstyle[1].addEventListener('click', function(){onClick(1)});
+    cardstyle[2].addEventListener('click', function(){onClick(2)});
+    cardstyle[3].addEventListener('click', function(){onClick(3)});
+    cardstyle[4].addEventListener('click', function(){onClick(4)});
+    cardstyle[5].addEventListener('click', function(){onClick(5)});
+    cardstyle[6].addEventListener('click', function(){onClick(6)});
+    cardstyle[7].addEventListener('click', function(){onClick(7)});
+    cardstyle[8].addEventListener('click', function(){onClick(8)});
+    cardstyle[9].addEventListener('click', function(){onClick(9)});
+    button[0].addEventListener('click', function(){
+        for (i = 0; i<cardstyle.length; i++) {
+            cardstyle[i].setAttribute('class', '');
+            cards[i].setAttribute('class', '');
+        }
+        clicknum = 0;
+        activeCardOne = '';
+        activeCardTwo = '';
+        card1 = '';
+        card2 = '';
+        used = [];
+        solved = 0;
+        i = 0;
+        while (i < cards.length) {
+            var random = Math.floor(Math.random() * 5);
+            var toput = inner[random];
+            if (used.indexOf(toput) != used.lastIndexOf(toput)) {
+            } else {
+                cards[i].innerHTML = toput.toString();
+                used += toput;
+                i++;
+            }
+        }
+    });
+
+    function onClick(card){
+        if((cardstyle[card].getAttribute('class') == 'flipped' || cards[card].getAttribute('class') == 'flipped')){
+            if (clicknum == 2) {
+                clearAttributes();
+            }
+        } else if(clicknum == 0){
+            card1 = card;
+            cardstyle[card].setAttribute('class', 'flipped');
+            cards[card].setAttribute('class', 'flipped');
+            activeCardOne = cards[card].innerHTML;
+            clicknum ++;
+        } else if(clicknum == 1){
+            card2 = card;
+            cardstyle[card].setAttribute('class', 'flipped');
+            cards[card].setAttribute('class', 'flipped');
+            activeCardTwo = cards[card].innerHTML;
+            if(activeCardOne == activeCardTwo) {
+                clicknum = 0;
+                solved ++;
+                if (solved == 5){
+                    alert('Congratulations! You won!');
+                }
+            } else {
+                clicknum ++;
+            }
+        } else {
+            clearAttributes();
+        }
+    }
+    function clearAttributes(){
+        cardstyle[card1].setAttribute('class', '');
+        cardstyle[card2].setAttribute('class', '');
+        cards[card1].setAttribute('class','');
+        cards[card2].setAttribute('class','');
+        clicknum = 0;
+    }
+
+
+</script>
+</body>
+</html>

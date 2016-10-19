@@ -1,0 +1,92 @@
+div {
+    width: 75px;
+    height: 75px;
+    float: left;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid black;
+}
+
+input {
+    float: left;
+    border: 1px solid black;
+    height: 25px;
+    margin-right: 6px;
+    margin-bottom: 5px;
+    font-size: medium;
+}
+#leftOp {
+    width: 130px;
+}
+#Op {
+    width: 25px;
+    text-align: center;
+}
+#rightOp {
+    width: 130px;
+}
+
+#one {
+    clear: left;
+}
+#four {
+    clear: left;
+}
+#seven {
+    clear:left;
+}
+#cancel {
+    clear:left;
+}
+#zero {
+    clear:left;
+    width: 152px
+}
+#hex {
+    clear:left;
+    width: 152px;
+}
+#binary {
+    width: 152px;
+}
+
+h3 {
+    clear:left;
+}
+
+ul {
+    clear:left;
+}
+
+.addtl {
+    background-color: #2c8011;
+    color: white;
+}
+.number {
+    background-color: #6a3484;
+    color: white;
+}
+.operator {
+    background-color: #1a6ecc;
+    color: white;
+}
+.number:hover {
+    background-color: #7643a8;
+}
+.operator:hover {
+    background-color: #2780e3;
+}
+.addtl:hover {
+    background-color: #999f8e;
+}
+.number:active {
+    background-color: #8d46b0;
+}
+.operator:active {
+    background-color: #66afe9;
+}
+.addtl:active{
+    background-color: #4e9f15;
+}
