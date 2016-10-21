@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        #map-canvas {
+            width: 770px;
+            height: 481px;
+        }
+        </style>
+</head>
+<body><!-- div to hold map -->
+<div id="map-canvas"></div>
+
+<!-- Load the Google Maps API [DON'T FORGET TO USE A KEY] -->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC4KlXE0TvOaRwqr4gBRsxI86CfNLLd8yo"></script>
+<!-- Script to show address on map -->
+<script type="text/javascript">
+    (function() {
+        "use strict";
+
+
+        // Set our map options
+        var mapOptions = {
+            // Set the zoom level
+            zoom: 16,
+
+            // This sets the center of the map at our location
+            center: {
+                lat:  29.426791,
+                lng: -98.489602
+            }
+        };
+
+        var address = '17623 La Cantera Pkwy #107, San Antonio, TX 78257';
+        var geocoder = new google.maps.Geocoder();
+
+        geocoder.geocode({'address': address}, function(results, status){
+            if (status == google.maps.GeocoderStatus.OK) {
+                map.setCenter(results[0].geometry.location)
+            } else {
+                alert('Geocoding was not successful - STATUS: ' + status);
+            }
+        });
+
+
+
+        // Render the map
+        var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+        var mashd = {lat: 29.609489, lng: -98.598603};
+        //var marker = new google.maps.Marker({
+        //    position: mashd,
+        //   map: map,
+        //    animation: google.maps.Animation.DROP
+        //});
+        window.setTimeout(function(){
+            var marker = new google.maps.Marker({
+                position: mashd,
+                map: map,
+                animation: google.maps.Animation.DROP
+            });
+            var infowindow = new google.maps.InfoWindow({
+                content: "<h1>Mash'd</h1>"
+            });
+            marker.addListener('click', function(){
+                infowindow.open(map, marker)
+            });
+        }, 4000);
+    })();
+
+</script>
+</body>
+</html>

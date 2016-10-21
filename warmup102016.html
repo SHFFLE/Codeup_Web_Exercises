@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function binaryConverter(num){
+        var result = 0;
+        var exponent = (num.length);
+        for(var i = 0; i < num.length; i++){
+            exponent--;
+            console.log('Pre-math:  i = ' + i + ' num = ' + num + ' numlength = ' + num.length + ' exponent = ' + exponent + ' result = ' + result);
+            result += (parseInt(num.charAt(i) * Math.pow(2, exponent)));
+            console.log('Post-math: i = ' + i + ' num = ' + num + ' numlength = ' + num.length + ' exponent = ' + exponent + ' result = ' + result);
+        }
+        return result;
+    }
+    console.log(binaryConverter('10100011'));
+    console.log(binaryConverter('101101'));
+    console.log(binaryConverter('110100101010'));
+    console.log(binaryConverter('11101111'));
+    console.log(binaryConverter('010000010'));
+</script>
+</body>
+</html>
