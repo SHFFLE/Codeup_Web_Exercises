@@ -5,9 +5,23 @@
     <title>jQuery Exercises</title>
 </head>
 <body>
-<script
+    <h1 id="header1">Hey</h1>
+    <p class="block" id="paragraph">Yo?</p>
+    <ul>
+        <li class="list" id="here">Here</li>
+        <li class="list" id="is">Is</li>
+        <li class="list" id="a">A</li>
+        <li class="list" id="list">List</li>
+    </ul>
+    <div class="block" id="div">And here's a div I guess</div>
+
+    <script
         src="https://code.jquery.com/jquery-3.1.1.js"
         integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="
         crossorigin="anonymous"></script>
+    <script>
+        var header1 = $('#header1');
+        alert(header1.html());
+    </script>
 </body>
 </html>
