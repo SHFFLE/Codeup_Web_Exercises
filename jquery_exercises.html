@@ -11,17 +11,50 @@
         <li class="list" id="here">Here</li>
         <li class="list" id="is">Is</li>
         <li class="list" id="a">A</li>
-        <li class="list" id="list">List</li>
+        <li class="" id="list">List</li>
     </ul>
     <div class="block" id="div">And here's a div I guess</div>
+
+    <h2>Password</h2>
+    <input id="input1" type="password">
+    <h2>Confirm</h2>
+    <input id="input2" type="password">
+    <button>submit</button>
 
     <script
         src="https://code.jquery.com/jquery-3.1.1.js"
         integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="
         crossorigin="anonymous"></script>
     <script>
-        var header1 = $('#header1');
-        alert(header1.html());
+        var $input1 = $('#input1');
+        var $input2 = $('#input2');
+        var $button = $('button');
+
+        $('#header1').click(function(){
+            $(this).css('background-color', 'purple');
+        });
+
+        $('.block').dblclick(function(){
+            $(this).css('font-size', '18px');
+        });
+
+        $('li').hover(function(){
+            $(this).css('color', 'red');
+        }, function(){
+            $(this).css('color', 'black');
+        });
+
+        $button.click(function(){
+            if ($input1.val().length < 6 && $input1.val().length > 0) {
+                $input1.css('border', '1px solid red');
+            }
+            if ($input2.val().length < 6 && $input2.val().length > 0) {
+                $input2.css('border', '1px solid red');
+            }
+            if ($input1.val() != $input2.val()) {
+                $input2.css('border', '1px solid red');
+            }
+        });
     </script>
 </body>
 </html>

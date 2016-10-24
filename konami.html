@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>F**KonamiNews</h1>
+<p>All the news that's fit to make you say...</p>
+<h1><strong style="font-size:50px">HIT THE LEVER!</strong></h1>
+<script>
+    var kkeys = '';
+    var konamicode = '3838404037393739666513';
+    $(document).keyup(function(e) {
+        kkeys += e.keyCode;
+        if (kkeys.substring(0) != konamicode.substring(0, kkeys.length)) {
+            kkeys = '';
+        } else if (kkeys == konamicode) {
+            alert('GG NO RE');
+            kkeys = '';
+        }
+    });
+</script>
+</body>
+</html>
