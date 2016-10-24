@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        dt {
+            font-size: 20px;
+            background-color: #7e3f9d;
+        }
+        dd {
+            background-color: #66afe9;
+        }
+        .invisible {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<dl>
+    <dt>WHM</dt>
+        <dd class="invisible">Burst heals, regen</dd>
+    <dt>SCH</dt>
+        <dd class="invisible">What's a heal? I'm a DPS.</dd>
+    <dt>PLD</dt>
+        <dd class="invisible">Damage? What damage?</dd>
+    <dt>WAR</dt>
+        <dd class="invisible">I, too, am a DPS. But I'm also a healer, and have a lot of health. Don't make me tank though.</dd>
+    <dt>AST</dt>
+        <dd class="invisible">SPIRE AGAIN? WHY, YOSHI-P? WHY?!?!?!</dd>
+    <dt>DRG</dt>
+        <dd class="invisible">Dammit, I was in a jump...</dd>
+    <dt>MNK</dt>
+        <dd class="invisible">Muh stacks</dd>
+    <dt>BLM</dt>
+        <dd class="invisible">Screw it, I'm taking this AOE to the face. Heal me, losers.</dd>
+    <dt>SMN</dt>
+        <dd class="invisible">BAHAMUT!</dd>
+    <dt>MCH</dt>
+        <dd class="invisible">OH NO! MY WILDFIRE!</dd>
+</dl>
+<h3>List One</h3>
+<ul>
+    <li>This</li>
+    <li>Is</li>
+    <li>List</li>
+    <li>One</li>
+</ul>
+<h3>List Two</h3>
+<ul>
+    <li>This</li>
+    <li>Is</li>
+    <li>List</li>
+    <li>Two</li>
+</ul>
+<h3>List Three</h3>
+<ul>
+    <li>This</li>
+    <li>Is</li>
+    <li>List</li>
+    <li>Three</li>
+</ul>
+<button>Toggle All</button>
+
+<script
+        src="https://code.jquery.com/jquery-3.1.1.js"
+        integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="
+        crossorigin="anonymous"></script>
+
+<script>
+    var active = false;
+
+    $('dt').on('click', function(){
+        $(this).next().toggleClass('invisible')
+    });
+
+    $('button').on('click', function(){
+        if (active == true){
+            $('dd').addClass('invisible');
+            active = false;
+        } else {
+            $('dd').removeClass('invisible');
+            active = true;
+        }
+    });
+
+    $('h3').click(function(){
+        $(this).next().show();
+    });
+
+    $('ul').each(function(){
+        $(this).children().first().css('font-weight', 'bold');
+    });
+
+    $('li').on('click', function(){
+        $(this).parent().toggleClass('invisible');
+    });
+
+
+</script>
+</body>
+</html>
