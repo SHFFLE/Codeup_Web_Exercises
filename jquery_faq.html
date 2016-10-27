@@ -71,29 +71,25 @@
     var active = false;
 
     $('dt').on('click', function(){
-        $(this).next().toggleClass('invisible')
+        $(this).next().slideToggle();
     });
 
     $('button').on('click', function(){
         if (active == true){
-            $('dd').addClass('invisible');
+            $('dd').slideDown();
             active = false;
         } else {
-            $('dd').removeClass('invisible');
+            $('dd').slideUp();
             active = true;
         }
     });
 
     $('h3').click(function(){
-        $(this).next().show();
+        $(this).next().slideToggle();
     });
 
     $('ul').each(function(){
         $(this).children().first().css('font-weight', 'bold');
-    });
-
-    $('li').on('click', function(){
-        $(this).parent().toggleClass('invisible');
     });
 
 
