@@ -35,21 +35,34 @@
         p {
             margin: 5px;
         }
-        input {
+        #lat {
             display: none;
         }
-        button {
+        #lon {
+            display: none;
+        }
+        #submit1 {
             display:none;
+        }
+        #input {
+            display:block;
+            align-content: center;
+            width:18%;
+            margin: auto;
         }
 
     </style>
 </head>
 <body>
-<input id='lat' type="text">
-<input id='lon' type="text">
-<button>Submit</button>
+    <input id='lat' type="text">
+    <input id='lon' type="text">
+    <button id="submit1">Submit</button>
 
 <div id="container">
+    <div id="input">
+        <input id="address" type="text" placeholder="Address">
+        <button id="submit2">Submit</button>
+    </div>
     <h1></h1>
     <div class="box" id="one"><h2>Today</h2><div class="boxcontent"></div></div>
     <div class="box" id="two"><h2>Tomorrow</h2><div class="boxcontent"></div></div>
@@ -62,7 +75,11 @@
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC4KlXE0TvOaRwqr4gBRsxI86CfNLLd8yo"></script>
 <script>
     var boxes = $('.boxcontent');
+    var address = $('#address');
+    address.val('');
+    var submit = $('#submit2');
     var h1 = $('h1');
+
     $.get("http://api.openweathermap.org/data/2.5/forecast/daily", {
         APPID: "bad0e7d24e107c9941b785f18818ae6c",
         q:     "San Antonio, TX",
@@ -72,7 +89,7 @@
         console.log(data);
         var days = data.list;
         console.log(days);
-        $(h1).html(data.city.name);
+        $(h1).html(data.city.name + ", " + data.city.country);
         for(i = 0; i < data.list.length; i++){
             var day = days[i];
             var daytemps = day.temp;
@@ -85,6 +102,8 @@
             console.log(day);
             console.log(daytemps.max);
         }
+    }).fail(function(){
+        alert("Oops");
     });
 
     var mapOptions = {
@@ -101,12 +120,12 @@
     // Render the map
     var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
 
-        var marker = new google.maps.Marker({
-            draggable: true,
-            position: mapOptions.center,
-            map: map,
-            title: "Your location"
-        });
+    var marker = new google.maps.Marker({
+        draggable: true,
+        position: mapOptions.center,
+        map: map,
+        title: "Your location"
+    });
 
     google.maps.event.addListener(marker, 'dragend', function(event) {
         document.getElementById("lat").value = event.latLng.lat();
@@ -124,7 +143,7 @@
             console.log(data);
             var days = data.list;
             console.log(days);
-            $(h1).html(data.city.name);
+            $(h1).html(data.city.name + ", " + data.city.country);
             $(boxes).html('');
             for(i = 0; i < data.list.length; i++){
                 var day = days[i];
@@ -141,6 +160,60 @@
             }
         })
     });
+
+    var geocoder = new google.maps.Geocoder();
+
+
+    submit.click(function(){
+
+        geocoder.geocode({'address': address.val()}, function(results, status){
+            if (status == google.maps.GeocoderStatus.OK) {
+                map.setCenter(results[0].geometry.location);
+                console.log("results: ");
+                console.log(results);
+                marker.setMap(null);
+
+                marker.position = map.center;
+                marker.setMap(map);
+
+                document.getElementById("lat").value = marker.position.lat();
+                document.getElementById("lon").value = marker.position.lng();
+                var latitude = parseFloat($('#lat').val());
+                var longitude = parseFloat($('#lon').val());
+
+                $.get("http://api.openweathermap.org/data/2.5/forecast/daily", {
+                    APPID: "bad0e7d24e107c9941b785f18818ae6c",
+                    lat: latitude,
+                    lon: longitude,
+                    cnt: 3,
+                    units: "imperial"
+                }).done(function(data){
+                    console.log(data);
+                    var days = data.list;
+                    console.log(days);
+                    $(h1).html(data.city.name + ", " + data.city.country);
+                    $(boxes).html('');
+                    for(i = 0; i < data.list.length; i++){
+                        var day = days[i];
+                        var daytemps = day.temp;
+                        var dayweather = day.weather[0].main;
+                        var weathericon = day.weather[0].icon;
+                        console.log(weathericon);
+                        $(boxes[i]).append("<p>High: " + daytemps.max + "</p>");
+                        $(boxes[i]).append("<p>Low: " + daytemps.min + "</p>");
+                        $(boxes[i]).append("<img src='http://openweathermap.org/img/w/" + weathericon + ".png'>");
+                        $(boxes[i]).append("<p>Weather: " + dayweather + "</p>");
+                        console.log(day);
+                        console.log(daytemps.max);
+                    }
+                })
+
+            } else {
+                alert('Geocoding was not successful - STATUS: ' + status);
+            }
+        });
+    })
+
 
 </script>
 </body>
