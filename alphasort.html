@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var array = ['e', 'a', 'g', 'c', 'i', 'd', 'f', 'b', 'h'];
+
+    function alphaSort(array){
+            do {
+                actualSort(array);
+            } while (arraychange == true);
+    }
+
+    function actualSort(array){
+        arraychange = false;
+        for (f = 0; f < array.length; f++){
+            for (i = f+1; i <= array.length; i++){
+                if (array[f] > array[i]){
+                    var storage = array[i];
+                    array.splice(i, 1);
+                    array.splice(f-1, 0, storage);
+                    console.log(array);
+                    arraychange = true;
+                }
+            }
+        }
+    }
+</script>
+</body>
+</html>
